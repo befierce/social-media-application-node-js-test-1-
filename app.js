@@ -2,11 +2,12 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const path = require('path');
-const Post = require('./models/main')
+const {Post,Comment} = require('./models/main')
 
 const adminRoutes = require('./routes/index');
 
 Post.sync();
+Comment.sync();
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));

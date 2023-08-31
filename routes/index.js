@@ -4,9 +4,9 @@ const postRequestHandeler = require('../controllers/mainController')
 const router = express.Router();
 
 
-
-router.post('/',postRequestHandeler.postRequestFromServer);
-router.get('/',postRequestHandeler.getRequestFromServer);
+router.post('/comment/:postId',postRequestHandeler.postCommentToServer);
+router.post('/',postRequestHandeler.postRequestFromClientToServer);
+router.get('/',postRequestHandeler.getRequestFromClienttoServer);
 
 
 
