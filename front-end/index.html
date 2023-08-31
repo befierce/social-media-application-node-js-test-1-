@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Create a New Post</h1>
+        <form id="postForm">
+            <label for="postLink">Post Link:</label>
+            <input type="text" id="postLink" name="postLink" required>
+            
+            <label for="postDescription">Post Description:</label>
+            <textarea id="postDescription" name="postDescription" rows="4" required></textarea>
+            
+            <button type="submit">Create Post</button>
+        </form>
+    </div>
+
+    <div class="post-container" id="postContainer">
+        <!-- Newly created posts will appear here -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
