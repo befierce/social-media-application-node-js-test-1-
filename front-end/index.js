@@ -1,3 +1,7 @@
+window.addEventListener("DOMContentLoaded", ()=>{
+    fetchAppointmentData();
+})
+
 const postForm = document.getElementById('postForm');
 const postContainer = document.getElementById('postContainer');
 
@@ -17,7 +21,7 @@ postForm.addEventListener('submit', async function(event) {
         const imageUrl = response.data.imagePath; 
         console.log(response.data.imagePath);
 
-        const newPost = createPostElement(postLink, postDescription, imageUrl);
+        const newPost = createPostElement(postDescription, imageUrl);
         postContainer.appendChild(newPost);
     } catch (error) {
         console.error('Error fetching image:', error);
@@ -28,14 +32,14 @@ postForm.addEventListener('submit', async function(event) {
     document.getElementById('postDescription').value = '';
 });
 
-function createPostElement(link, description, imageUrl) {
+function createPostElement(description, imageUrl) {
     const postElement = document.createElement('div');
     postElement.classList.add('post');
     postElement.style.height = '200px'
     postElement.style.width = '200px'
     const titleElement = document.createElement('h2');
-    titleElement.textContent = link;
-    postElement.appendChild(titleElement);
+    // titleElement.textContent = link;
+    // postElement.appendChild(titleElement);
 
     // Create an image element and set its source
     if (imageUrl) {
@@ -69,12 +73,14 @@ function createPostElement(link, description, imageUrl) {
     postElement.appendChild(commentSection);
 
     commentButton.addEventListener('click', function() {
+
+
         const commentText = commentInput.value;
         if (commentText) {
             const commentElement = document.createElement('div');
             commentElement.classList.add('comment');
             const commentParagraph = document.createElement('p');
-            commentParagraph.textContent = commentText;
+            commentParagraph.textContent = commentText; 
             commentElement.appendChild(commentParagraph);
             commentSection.appendChild(commentElement);
             commentInput.value = '';
@@ -82,4 +88,19 @@ function createPostElement(link, description, imageUrl) {
     });
 
     return postElement;
+}
+
+function fetchAppointmentData(){
+    axios.get("http://localhost:3000/")
+    .then((res)=>{
+        console.log(res.data);
+        for(var i = 0; i < res.data.length; i++){
+            const imageUrl = res.data[i].postLink; 
+            // console.log(imageUrl);
+            const description = res.data[i].postDescription;
+            // console.log(description);
+            const newPost = createPostElement(description, imageUrl);
+            postContainer.appendChild(newPost);
+        }
+    })
 }
