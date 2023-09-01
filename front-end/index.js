@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 const postForm = document.getElementById('postForm');
 const postContainer = document.getElementById('postContainer');
-let localPostsData = [];
+
 postForm.addEventListener('submit', async function (event) {
     event.preventDefault();
 
@@ -25,12 +25,12 @@ postForm.addEventListener('submit', async function (event) {
 
         // const newPost = createPostElement(postDescription, imageUrl, postId);
         // postContainer.appendChild(newPost);
-        localPostsData.push({
+        let localPostsData = [{
             id: postId,
             postLink: postLink,
             postDescription: postDescription,
             comments: [] // Assuming no comments for the new post initially
-        });
+        }];
         renderPosts(localPostsData);
 
 
@@ -55,13 +55,10 @@ function createPostElement(description, imageUrl, Id) {
     console.log("create post elemt vali postId:", postId);
     const postElement = document.createElement('div');
     postElement.classList.add('post');
-    postElement.style.height = '200px'
+    postElement.style.height = 'fit-content'
     postElement.style.width = '200px'
     const titleElement = document.createElement('h2');
-    // titleElement.textContent = link;
-    // postElement.appendChild(titleElement);
 
-    // Create an image element and set its source
     if (imageUrl) {
         const imageElement = document.createElement('img');
         imageElement.src = imageUrl;
@@ -85,13 +82,6 @@ function createPostElement(description, imageUrl, Id) {
     const commentButton = document.createElement('button');
     commentButton.type = 'button';
     commentButton.textContent = 'Comment';
-
-    commentForm.appendChild(commentInput);
-    commentForm.appendChild(commentButton);
-    commentSection.appendChild(commentForm);
-
-    postElement.appendChild(commentSection);
-
     commentButton.addEventListener('click', async function () {
         const commentText = commentInput.value;
         if (commentText) {
@@ -106,19 +96,26 @@ function createPostElement(description, imageUrl, Id) {
             }
         }
     });
+
+    commentForm.appendChild(commentInput);
+    commentForm.appendChild(commentButton);
+    commentSection.appendChild(commentForm);
+    postElement.appendChild(commentSection);
+
+
     return postElement;
 }
 
 function fetchAppointmentData() {
     axios.get("http://localhost:3000/")
-    .then((res) => {
-        localPostsData = res.data; // Store fetched data locally
-        renderPosts(localPostsData);
-    });
-}   
+        .then((res) => {
+            localPostsData = res.data; // Store fetched data locally
+            renderPosts(localPostsData);
+        });
+}
 function renderPosts(postsData) {
     // Clear the existing posts
-    postContainer.innerHTML = '';
+    // postContainer.innerHTML = '';
 
     // Iterate through each post and render
     postsData.forEach(post => {
@@ -128,15 +125,14 @@ function renderPosts(postsData) {
         const newPost = createPostElement(description, imageUrl, postId);
 
         const commentSection = newPost.querySelector('.comment-section');
-        
-        // Display existing comments
-        post.comments.forEach(comment => {
-            const commentText = comment.commentText;
+
+        for (let i = 0; i <= post.comments.length - 1; i++) {
+            const commentText = post.comments[i].commentText;
+            console.log(commentText);
             const commentElement = createCommentElement(commentText);
             commentSection.appendChild(commentElement);
-        });
+        }
 
         postContainer.appendChild(newPost);
     });
 }
-
