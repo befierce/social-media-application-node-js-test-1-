@@ -1,7 +1,21 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
+/* Reset some default styles */
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Define a primary color for consistency */
+:root {
+    --primary-color: #e74c3c; /* Seductive Red */
+    --background-color: #1d1d1d; /* Dark Background */
+    --font-color: #ffffff; /* White text color */
+    --comment-color: #cccccc; /* Light gray for comments */
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,15 +23,18 @@ body {
 }
 
 .container {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow */
     width: 400px;
 }
 
 h1 {
     text-align: center;
+    color: var(--font-color);
+    font-size: 28px; /* Larger font size for more impact */
+    margin-bottom: 20px;
 }
 
 form {
@@ -27,56 +44,81 @@ form {
 
 label {
     margin-top: 10px;
+    font-weight: bold;
+    font-size: 16px; /* Larger font size for labels */
+    color: var(--font-color);
 }
 
-input, textarea {
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+input,
+textarea {
+    padding: 12px; 
+    margin: 8px 0; 
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    border-radius: 5px;
     width: 100%;
+    font-size: 16px;
+    background-color: transparent; 
+    color: var(--font-color);
 }
 
 button {
-    padding: 10px;
-    background-color: #007bff;
+    padding: 12px; 
+    background-color: var(--primary-color);
     color: white;
     border: none;
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #c0392b; 
 }
 
 .post {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 15px;
     margin-top: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow */
 }
 
 .post h2 {
     margin: 0;
+    font-size: 24px; 
+    color: var(--font-color);
 }
 
 .post p {
     margin: 10px 0;
+    font-size: 16px;
+    color: var(--font-color);
 }
 
 .comment-section {
-    margin-top: 10px;
+    margin-top: 10px; 
 }
 
 .comment {
-    background-color: #f7f7f7;
-    padding: 10px;
-    border-radius: 3px;
-    margin-top: 10px;
+    background-color: rgba(255, 255, 255, 0.1); 
+    padding: 2px; 
+    border-radius: 5px;
+    margin-top: 5px;
+    color: var(--comment-color);
 }
 
 .comment p {
     margin: 0;
+    font-size: 16px;
+    color: var(--comment-color); /* Set the text color for comments */
+}
+.post {
+    /* Your existing styles for .post */
+    text-align: center; /* Center-aligns the content within .post */
+}
+
+.post img {
+    display: block; /* Ensures the image is treated as a block element */
+    margin: 0 auto; /* Auto margin left and right centers the image horizontally */
 }

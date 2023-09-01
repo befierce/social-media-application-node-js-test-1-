@@ -46,7 +46,7 @@ function createCommentElement(commentText) {
     const commentElement = document.createElement('div');
     commentElement.classList.add('comment');
     const commentParagraph = document.createElement('p');
-    commentParagraph.textContent = commentText;
+    commentParagraph.textContent =  commentText  + '   ~anonymous';
     commentElement.appendChild(commentParagraph);
     return commentElement;
 }
@@ -56,15 +56,15 @@ function createPostElement(description, imageUrl, Id) {
     const postElement = document.createElement('div');
     postElement.classList.add('post');
     postElement.style.height = 'fit-content'
-    postElement.style.width = '200px'
+    postElement.style.width = '300px'
     const titleElement = document.createElement('h2');
 
     if (imageUrl) {
         const imageElement = document.createElement('img');
         imageElement.src = imageUrl;
         imageElement.alt = 'Post Image';
-        imageElement.style.height = '120px'
-        imageElement.style.width = '120px'
+        imageElement.style.height = '200px'
+        imageElement.style.width = '200px'
         postElement.appendChild(imageElement);
     }
 
@@ -110,6 +110,8 @@ function fetchAppointmentData() {
     axios.get("http://localhost:3000/")
         .then((res) => {
             localPostsData = res.data; // Store fetched data locally
+
+            const breakElement = document.createElement('br');
             renderPosts(localPostsData);
         });
 }
